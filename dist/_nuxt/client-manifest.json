@@ -1,5 +1,5 @@
 {
-  "publicPath": "/_nuxt/",
+  "publicPath": "/barlow-www/dist/_nuxt/",
   "all": [
     "fonts/Barlow-Medium.874d40f.woff",
     "fonts/Barlow-Black.55b1e70.woff",
@@ -58,14 +58,14 @@
     "0.nuxt.bundle.846b1f5ea977691bf09d.js",
     "1.nuxt.bundle.92ff6954d53ba11f8f9e.js",
     "vendor.bundle.d8803dfa6d8c6ad87e18.js",
-    "nuxt.bundle.b4b6b2991f9e5315137d.js",
-    "manifest.8954c6f66dc61f516ec9.js",
+    "nuxt.bundle.3b76d2663014cdbca3d8.js",
+    "manifest.347e7f3d27c3ee0b3a52.js",
     "index.html"
   ],
   "initial": [
-    "manifest.8954c6f66dc61f516ec9.js",
+    "manifest.347e7f3d27c3ee0b3a52.js",
     "vendor.bundle.d8803dfa6d8c6ad87e18.js",
-    "nuxt.bundle.b4b6b2991f9e5315137d.js"
+    "nuxt.bundle.3b76d2663014cdbca3d8.js"
   ],
   "async": [
     "0.nuxt.bundle.846b1f5ea977691bf09d.js",
