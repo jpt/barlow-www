@@ -6,28 +6,28 @@
     <div class="styles">
       <ul>
         <li v-for="weight in weights">
-          <a @click="updateWeight(weight.name)">{{ weight.name }}</a> <template v-if="weight.name === selectedWeight">*</template>
+          <a @click="updateWeight(weight.name)">{{ weight.name }} </a><template v-if="weight.name === selectedWeight">*</template>
         </li>
       </ul>
       <ul>
         <li v-for="width in widths">
-          <a @click="updateWidth(width)">{{ width }}</a> <template v-if="width === selectedWidth">*</template>
+          <a @click="updateWidth(width)">{{ width }} </a><template v-if="width === selectedWidth">*</template>
         </li>
       </ul>
       <ul>
         <li v-for="style in styles">
-          <a @click="updateStyle(style)">{{ style }}</a> <template v-if="style === selectedStyle">*</template>
+          <a @click="updateStyle(style)">{{ style }} </a><template v-if="style === selectedStyle">*</template>
         </li>
       </ul>
       <ul>
         <li v-for="caseKind in cases">
-          <a @click="updateCase(caseKind)">{{ caseKind }}</a><template v-if="caseKind === selectedCase">*</template>
+          <a @click="updateCase(caseKind)">{{ caseKind }} </a><template v-if="caseKind === selectedCase">*</template>
         </li>
       </ul>
     </div>
     <div class="examples">
       <div v-for="pair in pairs">
-        <div class="size">{{ pair[0] }}px/{{ pair[1] }}px</div>
+        <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
         <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: 'Barlow-' + selectedWeight }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
       </div>
     </div>
@@ -97,13 +97,14 @@ export default {
       ],
       pairs: [
         [12, 20],
-        [14, 22],
-        [16, 26],
+        [14, 24],
+        [16, 27],
         [18, 30],
-        [24, 40],
-        [36, 52],
-        [48, 64],
-        [54, 72]
+        [24, 42],
+        [30, 52],
+        [36, 62],
+        [48, 84],
+        [54, 94]
       ]
     }
   },
@@ -125,13 +126,19 @@ export default {
     updateStyle: function (style) {
       this.selectedStyle = style
     }
+  },
+  computed: {
+    thisFont: function () {
+      //
+    }
   }
 }
 </script>
-<style>
+
+<style lang="scss">
 .size {
   margin-top: 35px;
-  font-size: 14px;
+  font-size: 12px;
   color: #a9a9a9;
   margin-bottom: 7px;
 }
@@ -139,12 +146,16 @@ export default {
   padding: 2em 4em;
 }
 
+.examples {
+  margin-left: 208px;
+  width: 720px;
+}
 h1 {
   font-size: 128px;
   letter-spacing:-3px;
   font-weight: 900;
   font-family: 'Barlow-Black';
-  margin-left: -8px;
+  margin-left: 207px;
   margin-bottom: 30px;
 }
 
@@ -156,6 +167,9 @@ h1 {
   float: left;
   overflow: scroll;
   width: 210px;
+  position: fixed;
+  top: 30px;
+  left: 40px;
 }
 .styles > ul > li {
   font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
@@ -167,8 +181,13 @@ h1 {
   font-family: 'Barlow-Regular';
   letter-spacing: 0.07em;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 22px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
 }
 p {
   margin-bottom: 2em;
