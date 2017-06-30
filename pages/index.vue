@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <h1>Barlow</h1>
+      <h1 :style="{ fontFamily: 'Barlow-' + selectedWeight + selectedWidth + selectedStyle, fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1>
     </div>
     <div class="styles">
       <ul>
@@ -12,11 +12,14 @@
       <ul>
         <li v-for="width in widths">
           <a @click="updateWidth(width)">{{ width }} </a><template v-if="width === selectedWidth">*</template>
+          <template v-if="selectedWidth === '' && width === 'Regular'">*</template>
+
         </li>
       </ul>
       <ul>
         <li v-for="style in styles">
           <a @click="updateStyle(style)">{{ style }} </a><template v-if="style === selectedStyle">*</template>
+          <template v-if="selectedStyle === '' && style === 'Roman'">*</template>
         </li>
       </ul>
       <ul>
@@ -28,58 +31,59 @@
     <div class="examples">
       <div v-for="pair in pairs">
         <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
-        <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: 'Barlow-' + selectedWeight }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
+        <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: 'Barlow-' + selectedWeight + selectedWidth + selectedStyle }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   data () {
     return {
-      selectedStyle: 'Roman',
-      selectedWidth: 'Regular',
+      selectedStyle: '',
+      selectedWidth: '',
       selectedWeight: 'Regular',
       selectedCase: 'Sentence case',
-      weights: [
-        {
+      weights: {
+        'Thin': {
           name: 'Thin',
           css: 100
         },
-        {
+        'UltraLight': {
           name: 'UltraLight',
           css: 200
         },
-        {
+        'Light': {
           name: 'Light',
           css: 300
         },
-        {
+        'Regular': {
           name: 'Regular',
           css: 400
         },
-        {
+        'Medium': {
           name: 'Medium',
           css: 500
         },
-        {
+        'DemiBold': {
           name: 'DemiBold',
           css: 600
         },
-        {
+        'Bold': {
           name: 'Bold',
           css: 700
         },
-        {
+        'ExtraBold': {
           name: 'ExtraBold',
           css: 800
         },
-        {
+        'Black': {
           name: 'Black',
           css: 900
         }
-      ],
+      },
       widths: [
         'Regular',
         'SemiCondensed',
@@ -96,15 +100,15 @@ export default {
         'Title Case'
       ],
       pairs: [
-        [12, 20],
-        [14, 24],
-        [16, 27],
-        [18, 30],
-        [24, 42],
+        [54, 84],
+        [48, 82],
+        [36, 58],
         [30, 52],
-        [36, 62],
-        [48, 84],
-        [54, 94]
+        [24, 42],
+        [18, 30],
+        [16, 27],
+        [14, 24],
+        [12, 20]
       ]
     }
   },
@@ -118,13 +122,24 @@ export default {
       this.selectedWeight = weight
     },
     updateWidth: function (width) {
-      this.selectedWidth = width
+      if (width === 'Regular') {
+        this.selectedWidth = ''
+      } else {
+        this.selectedWidth = width
+      }
     },
     updateCase: function (caseKind) {
       this.selectedCase = caseKind
     },
     updateStyle: function (style) {
-      this.selectedStyle = style
+      if (style === 'Roman') {
+        this.selectedStyle = ''
+      } else {
+        this.selectedStyle = style
+      }
+    },
+    fontWeightCSS: function (fontWeight) {
+      return this.weights[fontWeight].css
     }
   },
   computed: {
@@ -143,9 +158,11 @@ export default {
   margin-bottom: 7px;
 }
 .container {
-  padding: 2em 4em;
+  // padding: 2em 4em;
 }
-
+.container,.styles {
+  overflow: scroll !important;
+}
 .examples {
   margin-left: 208px;
   width: 720px;
@@ -154,8 +171,8 @@ h1 {
   font-size: 128px;
   letter-spacing:-3px;
   font-weight: 900;
-  font-family: 'Barlow-Black';
-  margin-left: 207px;
+  // font-family: 'Barlow-Black';
+  margin-left: 200px;
   margin-bottom: 30px;
 }
 
@@ -166,10 +183,11 @@ h1 {
 .styles {
   float: left;
   overflow: scroll;
-  width: 210px;
+  width: 160px;
   position: fixed;
   top: 30px;
   left: 40px;
+  height: 100%;
 }
 .styles > ul > li {
   font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
