@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <div class="preload">
+      <template v-for="weight in weights">
+        <template v-for="width in widths">
+          <template v-for="style in styles">
+            <span :style="{ fontFamily: fontName(weight.name, width, style) }">&zwnj;</span>
+          </template>
+        </template>
+      </template>
+    </div>
     <div>
       <h1 :style="{ fontFamily: fontName(selectedWeight, selectedWidth, selectedStyle), fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1>
     </div>
@@ -34,15 +43,7 @@
         <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: fontName(selectedWeight, selectedWidth, selectedStyle) }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
       </div>
     </div>
-    <div class="preload">
-      <template v-for="weight in weights">
-        <template v-for="width in widths">
-          <template v-for="style in styles">
-            <span :style="{ fontFamily: fontName(weight.name, width, style) }">&zwnj;</span>
-          </template>
-        </template>
-      </template>
-    </div>
+
   </div>
 </template>
 
