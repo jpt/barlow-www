@@ -55,20 +55,20 @@
     "fonts/Barlow-UltraLightOblique.809c812.woff",
     "fonts/Barlow-UltraLightSemiCondensed.850f90d.woff",
     "fonts/Barlow-UltraLightSemiCondensedOblique.6376cc8.woff",
-    "0.nuxt.bundle.f9443c6685df13424563.js",
+    "0.nuxt.bundle.d23002153e26087c0e9e.js",
     "1.nuxt.bundle.224e20024c810ab15be3.js",
-    "vendor.bundle.d8803dfa6d8c6ad87e18.js",
-    "nuxt.bundle.7b097c7707cf74265bc2.js",
-    "manifest.fb1d578c47da2989255e.js",
+    "vendor.bundle.98ceac8f150b42f7be9a.js",
+    "nuxt.bundle.f74cd06e7ed58632ef18.js",
+    "manifest.2282e3be0f775028d814.js",
     "index.html"
   ],
   "initial": [
-    "manifest.fb1d578c47da2989255e.js",
-    "vendor.bundle.d8803dfa6d8c6ad87e18.js",
-    "nuxt.bundle.7b097c7707cf74265bc2.js"
+    "manifest.2282e3be0f775028d814.js",
+    "vendor.bundle.98ceac8f150b42f7be9a.js",
+    "nuxt.bundle.f74cd06e7ed58632ef18.js"
   ],
   "async": [
-    "0.nuxt.bundle.f9443c6685df13424563.js",
+    "0.nuxt.bundle.d23002153e26087c0e9e.js",
     "1.nuxt.bundle.224e20024c810ab15be3.js"
   ],
   "modules": {
@@ -390,6 +390,9 @@
     "4fa5ff68": [
       57
     ],
+    "83b7e80c": [
+      56
+    ],
     "3c00f26b": [
       57
     ],
@@ -418,9 +421,6 @@
       57
     ],
     "17aba1ec": [
-      56
-    ],
-    "83b7e80c": [
       56
     ],
     "79b589b8": [

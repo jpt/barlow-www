@@ -1,16 +1,12 @@
 <template>
   <div class="container">
     <div class="preload">
-      <template v-for="weight in weights">
-        <template v-for="width in widths">
-          <template v-for="style in styles">
-            <span :style="{ fontFamily: fontName(weight.name, width, style) }">&zwnj;</span>
-          </template>
-        </template>
+      <template v-for="font in allStyles">
+        <span :style="{ fontFamily: font }">&zwnj;</span>
       </template>
     </div>
     <div>
-      <h1 :style="{ fontFamily: fontName(selectedWeight, selectedWidth, selectedStyle), fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1>
+      <h1 :style="{ fontFamily: selectedFontFamily, fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1>
     </div>
     <div class="styles">
       <ul>
@@ -40,7 +36,7 @@
     <div class="examples">
       <div v-for="pair in pairs">
         <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
-        <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: fontName(selectedWeight, selectedWidth, selectedStyle) }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
+        <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
       </div>
     </div>
 
@@ -154,8 +150,34 @@ export default {
     }
   },
   computed: {
-    thisFont: function () {
-      //
+    selectedFontFamily: function () {
+      if (this.selectedWidth === 'Regular') {
+        this.selectedWidth = ''
+      }
+      if (this.selectedStyle === 'Roman') {
+        this.selectedStyle = ''
+      }
+      return 'Barlow-' + this.selectedWeight + this.selectedWidth + this.selectedStyle
+    },
+    allStyles: function () {
+      let fonts = []
+      for (let weight = 0; weight < Object.keys(this.weights).length; weight++) {
+        for (let width = 0; width < this.widths.length; width++) {
+          for (let style = 0; style < this.styles.length; style++) {
+            let wi = this.widths[width]
+            if (wi === 'Regular') {
+              wi = ''
+            }
+            let st = this.styles[style]
+            if (st === 'Roman') {
+              st = ''
+            }
+            let font = ['Barlow-', Object.keys(this.weights)[weight], wi, st].join('')
+            fonts.push(font)
+          }
+        }
+      }
+      return fonts
     }
   }
 }
@@ -165,6 +187,12 @@ export default {
 
 @import "~assets/fonts/fonts.css";
 
+.preload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 .size {
   margin-top: 35px;
   font-size: 12px;
