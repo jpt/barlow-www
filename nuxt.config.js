@@ -10,7 +10,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Barlow, a grotesk typeface in 54 styles by Jeremy Tribby' }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
@@ -21,7 +21,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#000' },
   /*
   ** Build configuration
   */
@@ -39,5 +39,6 @@ module.exports = {
         })
       }
     }
+
   }
 }

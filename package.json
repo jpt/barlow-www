@@ -5,6 +5,7 @@
   "author": "Jeremy Tribby <jeremy@tribby.com>",
   "private": true,
   "dependencies": {
+    "base64-font-loader": "0.0.4",
     "node-sass": "^4.5.3",
     "nuxt": "latest",
     "sass-loader": "^6.0.6",
