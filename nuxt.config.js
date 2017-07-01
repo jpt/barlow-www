@@ -10,7 +10,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Barlow, a grotesk typeface in 54 styles by Jeremy Tribby' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
@@ -38,7 +38,16 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+
+    loaders: [
+      {
+        test: /\.(woff|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'base64-font-loader'
+      }
+    ]
+    
+
 
   }
 }
