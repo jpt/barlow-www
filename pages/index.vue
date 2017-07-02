@@ -18,7 +18,6 @@
         <li v-for="width in widths">
           <a @click="updateWidth(width)">{{ width }} </a><template v-if="width === selectedWidth">*</template>
           <template v-if="selectedWidth === '' && width === 'Regular'">*</template>
-
         </li>
       </ul>
       <ul>
@@ -36,7 +35,7 @@
     <div class="examples">
       <div v-for="pair in pairs">
         <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
-        <p :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily }">There's a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can't take part! You can't even passively take part! And you've got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you've got to make it stop! And you've got to indicate to the people who run it, to the people who own it, that unless you're free, the machine will be prevented from working at all!</p>
+        <p contenteditable spellcheck="false" @input="updateText" :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily }">{{ bodyText }}</p>
       </div>
     </div>
 
@@ -52,6 +51,7 @@ export default {
       selectedWidth: 'Regular',
       selectedWeight: 'Regular',
       selectedCase: 'Sentence case',
+      bodyText: 'There\'s a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can\'t take part! You can\'t even passively take part! And you\'ve got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you\'ve got to make it stop! And you\'ve got to indicate to the people who run it, to the people who own it, that unless you\'re free, the machine will be prevented from working at all!',
       weights: {
         'Thin': {
           name: 'Thin',
@@ -119,10 +119,8 @@ export default {
     }
   },
   methods: {
-    styled: function (weight) {
-      return {
-        fontWeight: weight.css, fontFamily: 'Barlow-' + weight.name
-      }
+    updateText (e) {
+      this.bodyText = e.target.innerText
     },
     updateWeight: function (weight) {
       this.selectedWeight = weight
@@ -172,7 +170,7 @@ export default {
             if (st === 'Roman') {
               st = ''
             }
-            let font = ['Barlow-', Object.keys(this.weights)[weight], wi, st].join('')
+            let font = ['Barlow-', Object.keys(this.weights)[weight], wi, st].join('') // join because regular concatenation will force the string 'undefined'
             fonts.push(font)
           }
         }
@@ -189,9 +187,10 @@ export default {
 
 .preload {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+  opacity: 0;
+  // top: 0;
+  // left: 0;
+  // z-index: -1;
 }
 .size {
   margin-top: 35px;
@@ -211,7 +210,6 @@ export default {
 }
 h1 {
   font-size: 128px;
-  letter-spacing:-3px;
   font-weight: 900;
   // font-family: 'Barlow-Black';
   margin-left: 200px;
@@ -232,11 +230,7 @@ h1 {
   height: 100%;
 }
 .styles > ul > li {
-  font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
-  -moz-font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
-  -webkit-font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
-  -ms-font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp"; 
-  -o-font-feature-settings: "kern" on, "liga" on, "calt" on, "smcp";
+  font-feature-settings: "smcp"; 
   text-transform: lowercase;
   font-family: 'Barlow-Regular';
   letter-spacing: 0.07em;
@@ -272,5 +266,7 @@ li {
   font-weight: 100;
 }
 
-
+.examples p:focus {
+    outline: none;
+}
 </style>
