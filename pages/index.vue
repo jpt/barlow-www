@@ -6,7 +6,7 @@
       </template>
     </div>
     <div>
-      <h1 :style="{ fontFamily: selectedFontFamily, fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1>
+<!--       <h1 :style="{ fontFamily: selectedFontFamily, fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1> -->
     </div>
     <div class="styles">
       <ul>
@@ -35,7 +35,7 @@
     <div class="examples">
       <div v-for="pair in pairs">
         <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
-        <p contenteditable spellcheck="false" @input="updateText" :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily }">{{ bodyText }}</p>
+        <p contenteditable spellcheck="false" @input="updateText" :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily, textTransform: caseCSS }">{{ bodyText }}</p>
       </div>
     </div>
 
@@ -50,7 +50,7 @@ export default {
       selectedStyle: 'Roman',
       selectedWidth: 'Regular',
       selectedWeight: 'Regular',
-      selectedCase: 'Sentence case',
+      selectedCase: 'Default',
       bodyText: 'There\'s a time when the operation of the machine becomes so odious, makes you so sick at heart, that you can\'t take part! You can\'t even passively take part! And you\'ve got to put your bodies upon the gears and upon the wheels, upon the levers, upon all the apparatus, and you\'ve got to make it stop! And you\'ve got to indicate to the people who run it, to the people who own it, that unless you\'re free, the machine will be prevented from working at all!',
       weights: {
         'Thin': {
@@ -102,7 +102,7 @@ export default {
       cases: [
         'Uppercase',
         'Lowercase',
-        'Sentence case',
+        'Default',
         'Title Case'
       ],
       pairs: [
@@ -156,6 +156,18 @@ export default {
         this.selectedStyle = ''
       }
       return 'Barlow-' + this.selectedWeight + this.selectedWidth + this.selectedStyle
+    },
+    caseCSS: function () {
+      switch (this.selectedCase) {
+        case 'Default':
+          return ''
+        case 'Uppercase':
+          return 'uppercase'
+        case 'Lowercase':
+          return 'lowercase'
+        case 'Title Case':
+          return 'capitalize'
+      }
     },
     allStyles: function () {
       let fonts = []
