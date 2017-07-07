@@ -35,7 +35,7 @@
     <div class="examples">
       <div v-for="pair in pairs">
         <div class="size">{{ pair[0] }}px / {{ pair[1] }}px</div>
-        <p contenteditable spellcheck="false" @input="updateText" :style="{ fontStyle: selectedStyle, fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily, textTransform: caseCSS }">{{ bodyText }}</p>
+        <p contenteditable spellcheck="false" @input="updateText" :style="{ fontSize: pair[0] + 'px', lineHeight: pair[1] + 'px', fontFamily: selectedFontFamily, textTransform: caseCSS }">{{ bodyText }}</p>
       </div>
     </div>
 
