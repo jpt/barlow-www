@@ -6,29 +6,27 @@
       </template>
     </div>
     <div>
-<!--       <h1 :style="{ fontFamily: selectedFontFamily, fontWeight: fontWeightCSS(selectedWeight) }">Barlow</h1> -->
+      <h1>Barlow</h1>
     </div>
     <div class="styles">
       <ul>
         <li v-for="weight in weights">
-          <a @click="updateWeight(weight.name)">{{ weight.name }} </a><template v-if="weight.name === selectedWeight">*</template>
+          <a :class="{ active: isWeight(weight.name) }" @click="updateWeight(weight.name)">{{ weight.name }} </a>
         </li>
       </ul>
       <ul>
         <li v-for="width in widths">
-          <a @click="updateWidth(width)">{{ width }} </a><template v-if="width === selectedWidth">*</template>
-          <template v-if="selectedWidth === '' && width === 'Regular'">*</template>
+          <a :class="{ active: isWidth(width) }" @click="updateWidth(width)">{{ width }} </a>
         </li>
       </ul>
       <ul>
         <li v-for="style in styles">
-          <a @click="updateStyle(style)">{{ style }} </a><template v-if="style === selectedStyle">*</template>
-          <template v-if="selectedStyle === '' && style === 'Roman'">*</template>
+          <a :class="{ active: isStyle(style) }" @click="updateStyle(style)">{{ style }} </a>
         </li>
       </ul>
       <ul>
         <li v-for="caseKind in cases">
-          <a @click="updateCase(caseKind)">{{ caseKind }} </a><template v-if="caseKind === selectedCase">*</template>
+          <a :class="{ active: isCase(caseKind) }" @click="updateCase(caseKind)">{{ caseKind }} </a>
         </li>
       </ul>
     </div>
@@ -145,6 +143,18 @@ export default {
         style = ''
       }
       return 'Barlow-' + weight + width + style
+    },
+    isWeight: function (weight) {
+      return this.selectedWeight === weight
+    },
+    isWidth: function (width) {
+      return this.selectedWidth === width || (this.selectedWidth === '' && width === 'Regular')
+    },
+    isStyle: function (style) {
+      return this.selectedStyle === style || (this.selectedStyle === '' && style === 'Roman')
+    },
+    isCase: function (caseKind) {
+      return this.selectedCase === caseKind
     }
   },
   computed: {
@@ -196,13 +206,24 @@ export default {
 <style lang="scss">
 
 @import "~assets/fonts/fonts.css";
+@import "node_modules/breakpoint-sass/stylesheets/breakpoint";
+
+.container {
+  // max-width: 720px;
+  padding-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  @include breakpoint(1024px) {
+
+  }
+
+  width: 100%;
+}
 
 .preload {
   position: absolute;
   opacity: 0;
-  // top: 0;
-  // left: 0;
-  // z-index: -1;
+  z-index: -1;
 }
 .size {
   margin-top: 35px;
@@ -210,22 +231,11 @@ export default {
   color: #a9a9a9;
   margin-bottom: 7px;
 }
-.container {
-  // padding: 2em 4em;
-}
-.container,.styles {
-  overflow: scroll !important;
-}
+
 .examples {
-  margin-left: 208px;
-  width: 720px;
-}
-h1 {
-  font-size: 128px;
-  font-weight: 900;
-  // font-family: 'Barlow-Black';
-  margin-left: 200px;
-  margin-bottom: 30px;
+  // margin-left: 208px;
+  width: 100%;
+  max-width: 720px;
 }
 
 .width {
@@ -233,14 +243,19 @@ h1 {
 }
 
 .styles {
-  float: left;
-  overflow: scroll;
-  width: 160px;
-  position: fixed;
-  top: 30px;
-  left: 40px;
-  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 720px;
+  min-width: 590px;
+  // float: left;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
 }
+
 .styles > ul > li {
   font-feature-settings: "smcp"; 
   text-transform: lowercase;
@@ -248,7 +263,8 @@ h1 {
   letter-spacing: 0.07em;
   font-weight: 500;
   font-size: 14px;
-  line-height: 22px;
+  line-height: 28px;
+
 
   &:hover {
     cursor: pointer;
@@ -265,18 +281,40 @@ ul {
   list-style-type: none;
   margin-bottom: 2em;
   margin-right: 2em;
+  float: left;
 }
 li {
+  overflow: hidden;
   font-size: 1em;
   line-height: 1.35em;
   font-weight: 400;
 }
-.styles ul > ul:first-of-type {
-  margin-right: 4em;
+
+h1 {
+  font-family: 'Barlow-ExtraBold';
+  font-size: 60px;
+  margin-bottom: 20px;
+  margin-left: -5px;
+  padding: 0;
 }
-.thin {
-  font-weight: 100;
+li a {
+  display: inline-block;
+  &:after {
+    content: '';
+    display: block;
+    margin-top: -4px;
+    height: 1px;
+    width: 0%;
+    background: #000;
+    transition: width 150ms;
+  }
+  &.active {
+    &:after {
+      width: 100%;
+    }
+  }
 }
+
 
 .examples p:focus {
     outline: none;

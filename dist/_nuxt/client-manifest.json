@@ -55,21 +55,21 @@
     "fonts/Barlow-UltraLightOblique.6dd261d.woff",
     "fonts/Barlow-UltraLightSemiCondensed.26891fa.woff",
     "fonts/Barlow-UltraLightSemiCondensedOblique.e0bf166.woff",
-    "0.nuxt.bundle.a485d3b3852e4a61c018.js",
-    "1.nuxt.bundle.224e20024c810ab15be3.js",
+    "0.nuxt.bundle.9f1e0150c0452bc35687.js",
+    "1.nuxt.bundle.4d56dfa8da3f57c9f346.js",
     "vendor.bundle.98ceac8f150b42f7be9a.js",
     "nuxt.bundle.f74cd06e7ed58632ef18.js",
-    "manifest.69c96f2655b8e0b5f134.js",
+    "manifest.bd6f229c2f3091da0121.js",
     "index.html"
   ],
   "initial": [
-    "manifest.69c96f2655b8e0b5f134.js",
+    "manifest.bd6f229c2f3091da0121.js",
     "vendor.bundle.98ceac8f150b42f7be9a.js",
     "nuxt.bundle.f74cd06e7ed58632ef18.js"
   ],
   "async": [
-    "0.nuxt.bundle.a485d3b3852e4a61c018.js",
-    "1.nuxt.bundle.224e20024c810ab15be3.js"
+    "0.nuxt.bundle.9f1e0150c0452bc35687.js",
+    "1.nuxt.bundle.4d56dfa8da3f57c9f346.js"
   ],
   "modules": {
     "18522843": [
