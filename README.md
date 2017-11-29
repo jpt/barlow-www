@@ -1,5 +1,5 @@
 
-
+Active development has moved to https://github.com/jpt/tribby.com/blob/master/pages/fonts/barlow.vue
 ~~# barlow-www~~
 
 ~~> Barlow font website~~
